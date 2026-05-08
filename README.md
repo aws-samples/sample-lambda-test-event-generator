@@ -55,9 +55,9 @@ This system uses a sophisticated 3-agent architecture to analyze AWS Lambda func
 
 8. IAM role authorizes access and fetches Lambda function code as a ZIP file, extracts source files, filters out dependencies (node_modules, venv, etc.) and non-code files, applies user-defined ignore patterns, and chunks code into manageable pieces
 
-9. Boto3 Amazon Bedrock client authenticates with AWS IAM for Amazon Bedrock access, requesting invoke model permissions to use Claude 3.7 Sonnet
+9. Boto3 Amazon Bedrock client authenticates with AWS IAM for Amazon Bedrock access, requesting invoke model permissions to use Claude 4.6 Sonnet
 
-10. IAM role authorizes and sends code chunks to Amazon Bedrock (us-east-1) using Claude Sonnet 4 model (us.anthropic.claude-sonnet-4-20250514-v1:0). Amazon Bedrock performs Regex + LLM enhanced analysis to extract actual input patterns (e.g., event['body'], headers['Authorization']), output patterns (e.g., statusCode, response body structure), dependencies, error handling patterns, and edge cases from the code
+10. IAM role authorizes and sends code chunks to Amazon Bedrock (us-east-1) using Claude Sonnet 4.6 model (us.anthropic.claude-sonnet-4-6). Amazon Bedrock performs Regex + LLM enhanced analysis to extract actual input patterns (e.g., event['body'], headers['Authorization']), output patterns (e.g., statusCode, response body structure), dependencies, error handling patterns, and edge cases from the code
 
 11. Analyzer Agent packages the analysis results into an AnalysisResult object containing code chunks, input patterns, output patterns, dependencies, error patterns, and metadata, then passes it to the Generator Agent
 
@@ -250,13 +250,13 @@ table.query(
 - **Python**: 3.11 or higher
 - **AWS CLI**: Installed and configured (`aws configure`)
 - **AWS Account**: With access to Lambda, Amazon Bedrock, DynamoDB, and Cognito
-- **Bedrock Model Access**: Anthropic Claude Sonnet 4 enabled in us-east-1
+- **Bedrock Model Access**: Anthropic Claude Sonnet 4.6 enabled in us-east-1
 - **IAM Permissions**: User/role must have CloudFormation, IAM, DynamoDB, Cognito, Bedrock, and Lambda permissions
 
 ### AWS Services Used
 
 - **AWS Lambda**: For fetching function code
-- **Amazon Bedrock**: For AI-powered code analysis (Claude 3.7 Sonnet)
+- **Amazon Bedrock**: For AI-powered code analysis (Claude 4.6 Sonnet)
 - **Amazon DynamoDB**: For memory store
 - **Amazon Cognito**: For authentication
 - **Amazon Bedrock AgentCore**: For serverless agent runtime
@@ -1050,7 +1050,7 @@ Check: aws sts get-caller-identity
 **2. "Model Not Found" Error**
 ```
 Solution: Enable Amazon Bedrock model access in AWS Console
-Navigate: Amazon Bedrock → Model access → Enable Claude 3.7 Sonnet
+Navigate: Amazon Bedrock → Model access → Enable Claude 4.6 Sonnet
 ```
 
 **3. "DynamoDB Table Not Found"**

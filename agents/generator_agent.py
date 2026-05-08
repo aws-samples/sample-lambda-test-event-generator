@@ -74,7 +74,7 @@ class GenerationResult:
 class GeneratorAgent:
     """Agent responsible for generating candidate test events.
     
-    Note: Always uses us-east-1 for Amazon Bedrock API calls (where Claude 3.7 is available),
+    Note: Always uses us-east-1 for Amazon Bedrock API calls (where Claude 4.6 is available),
     but generates tests for Lambda functions from any region.
     """
     
@@ -646,7 +646,7 @@ Generate the summary now:"""
             input_patterns = chunk_summary.get('inputs', [])
             output_patterns = chunk_summary.get('outputs', [])
             error_patterns = chunk_summary.get('edge_cases', [])
-            code_content = chunk_summary.get('content', '')[:20000]  # Increased limit for Claude 3.7's larger context
+            code_content = chunk_summary.get('content', '')[:20000]  # Increased limit for Claude 4.6's larger context
             
             # Calculate distribution (roughly equal split)
             num_positive = max(1, num_tests // 3)
@@ -807,7 +807,7 @@ Generate {num_edge} EDGE test input events.
         """
         import boto3
         
-        # Always use us-east-1 for Bedrock (where Claude 3.7 is available)
+        # Always use us-east-1 for Bedrock (where Claude 4.6 is available)
         bedrock_client = boto3.client('bedrock-runtime', region_name='us-east-1')
         model_id = 'us.anthropic.claude-sonnet-4-6'
         

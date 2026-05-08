@@ -43,14 +43,14 @@ class AnalysisResult:
 class AnalyzerAgent:
     """Lambda code analysis and JSON test case generation agent.
     
-    Note: Always uses us-east-1 for Bedrock API calls (where Claude 3.7 is available),
+    Note: Always uses us-east-1 for Bedrock API calls (where Claude 4.6 is available),
     but can analyze Lambda functions from any region.
     """
     
     def __init__(self, region: str = None, model_id: str = None):
         self.region = region or 'us-east-1'
         
-        # Always use US region for Bedrock (where Claude 3.7 is available)
+        # Always use US region for Bedrock (where Claude 4.6 is available)
         self.bedrock_region = 'us-east-1'
         
         # Use the latest Claude model from US region

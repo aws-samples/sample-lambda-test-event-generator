@@ -39,7 +39,7 @@ class CodeAnalyzer:
     def __init__(self, region: str = 'us-east-1', model_id: str = None):
         """Initialize CodeAnalyzer with optional Bedrock client."""
         self.region = region
-        # Use inference profile ARN for Claude 3.7 Sonnet
+        # Use inference profile ARN for Claude 4.6 Sonnet
         self.model_id = model_id or 'us.anthropic.claude-sonnet-4-6'
         self.bedrock_client = None
         self.max_workers = 5  # Max parallel threads for Bedrock calls
