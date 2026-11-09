@@ -821,7 +821,7 @@ For **Production** environments:
    ```bash
    aws cloudtrail create-trail \
      --name lambda-test-generator-audit \
-     --s3-bucket-name my-audit-bucket
+     --s3-bucket-name amzn-s3-demo-bucket
    ```
 
 3. **Monitor with CloudWatch**:
