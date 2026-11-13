@@ -7,6 +7,7 @@ Authenticates via Cognito, invokes AgentCore with bearer token.
 
 import streamlit as st
 import json
+import logging
 import os
 import re
 import time
@@ -484,7 +485,11 @@ def parse_agentcore_output(output: str) -> dict:
                     'description': match.group(6).strip(),
                     'input_event': json.loads(match.group(7).strip()),
                 })
-            except Exception:
+            except (ValueError, TypeError, IndexError) as parse_err:
+                # Skip malformed test cases (e.g. invalid JSON) but leave a trace
+                logging.getLogger(__name__).warning(
+                    "Skipping malformed test case %s: %s", match.group(2), parse_err
+                )
                 continue
     except Exception as e:
         st.error(f"Error parsing output: {e}")
